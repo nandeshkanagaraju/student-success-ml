@@ -433,7 +433,7 @@
     ];
     $("#findGrid").innerHTML = F.map((x, i) => '<article class="card finding' + (x[2] ? " key" : "") + '"><span class="no">0' + (i + 1) + "</span><h3>" + esc(x[0]) + "</h3><p>" + esc(x[1]) + "</p></article>").join("");
     $("#refList").innerHTML = D.references.map((r) => "<li>" + esc(r.t) + ' <a href="' + r.url + '" target="_blank" rel="noopener">' + esc(r.label) + "</a></li>").join("");
-    [["#ghLink", D.links.github, "GitHub repository ↗"], ["#kgLink", D.links.kaggle, "Kaggle notebook ↗"]].forEach(([sel, u, label]) => {
+    [["#ghLink", D.links.github, "GitHub repository ↗"], ["#kgLink", D.links.kaggle, "Kaggle dataset ↗"]].forEach(([sel, u, label]) => {
       const a = $(sel);
       if (u && u !== "#") { a.href = u; a.target = "_blank"; a.textContent = label; a.removeAttribute("aria-disabled"); }
       else { a.setAttribute("aria-disabled", "true"); a.removeAttribute("href"); a.setAttribute("role", "link"); a.tabIndex = -1; }

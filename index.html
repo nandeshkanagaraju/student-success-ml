@@ -21,6 +21,7 @@
     <a class="brand" href="#top">Student Success ML</a>
     <nav aria-label="Sections" style="flex:1;min-width:0;display:flex">
       <ul id="navList">
+        <li><a href="#demo" class="hl">Try the demo</a></li>
         <li><a href="#problem">Problem</a></li>
         <li><a href="#dataset">Data</a></li>
         <li><a href="#pipeline">Pipeline</a></li>
@@ -47,7 +48,55 @@
     <p class="lede">We rebuilt a research paper’s experiments from scratch: 10 prediction models, each tuned 3 ways, then compared our results with the original, number by number.</p>
     <p class="byline"><strong>K Nandesh</strong> (127018025, CSBS) · School of Computing, SASTRA · Guide: Dr. Vidivelli · CSE425 Machine Learning Essentials<br>
       <span class="mono" style="font-size:.82rem">Comparative Analysis of ML Algorithms with Hyperparameter Optimization for Predicting Student Academic Success</span></p>
+    <div class="linkrow"><a class="btn primary" href="#demo">Try a student prediction →</a><a class="btn" href="#results">Explore research results</a></div>
     <div class="stats" id="heroStats" aria-label="Headline numbers"></div>
+  </div>
+</section>
+
+<!-- Interactive product trial -->
+<section id="demo">
+  <div class="wrap">
+    <div class="eyebrow"><b>LIVE LAB</b> Student success predictor</div>
+    <h2>From student profile to GPA. Try it yourself.</h2>
+    <p class="lede">Train a small model, make a prediction, then change a student’s study habits to see how the estimate moves.</p>
+    <noscript><p>This demo needs JavaScript enabled.</p></noscript>
+    <ol class="lab-steps" aria-label="Demo workflow">
+      <li id="labStep1" class="active"><span>01</span> Choose data</li>
+      <li id="labStep2"><span>02</span> Train &amp; test</li>
+      <li id="labStep3"><span>03</span> Predict &amp; explore</li>
+    </ol>
+    <div class="grid g2 lab-layout">
+      <div class="card">
+        <h3>1. Give the model examples</h3>
+        <p class="muted">Start instantly with teaching data, or use the original CSV from your project.</p>
+        <div class="controls"><button class="btn" id="labSample" type="button">Load example data</button><label class="btn lab-upload">Upload CSV<input id="labFile" type="file" accept=".csv,text/csv"></label></div>
+        <p id="labData" class="lab-source">No data loaded. Example data is synthetic and is not the research dataset.</p>
+        <details class="lab-schema"><summary>CSV requirements &amp; privacy</summary><p>Use the Kaggle Students Performance CSV: the 12 inputs listed below plus GPA (0–4). StudentID and GradeClass are ignored to avoid leakage. Other columns are ignored. Numeric values, 30–5,000 rows, maximum 2 MB. Data stays in this browser tab and is not uploaded or saved.</p><p id="labColumns" class="mono"></p></details>
+        <h3>2. Train &amp; test a model</h3>
+        <label class="ctl-label" for="labModel">Prediction method</label>
+        <select id="labModel" class="lab-select"><option value="knn">K-Nearest Neighbors · k = 5</option><option value="linear">Linear regression · baseline</option></select>
+        <p class="tip" id="labMethod">Finds the five closest training profiles and averages their GPAs. Uses unscaled inputs, like the notebook.</p>
+        <button class="btn primary" id="labTrain" type="button" disabled>Train &amp; evaluate</button>
+        <p class="tip">Reproducible 80/20 split, seed 42. This browser’s shuffle differs from scikit-learn’s split. No tuning or cross-validation is run here.</p>
+        <div id="labStatus" role="status" class="lab-status">Load data to begin.</div>
+        <div id="labMetrics" hidden></div>
+      </div>
+      <div class="card lab-predict">
+        <div class="lab-heading"><h3>3. Try a student profile</h3><span class="tag">WHAT IF?</span></div>
+        <p class="muted">These are hypothetical profiles. Change the inputs and run a prediction.</p>
+        <fieldset id="labInputs" disabled>
+          <legend class="sr-only">Student profile</legend>
+          <div class="controls lab-presets"><button class="btn" type="button" data-profile="regular">Regular attendance</button><button class="btn" type="button" data-profile="absent">Frequent absences</button><button class="btn" type="button" id="labReset">Reset</button></div>
+          <div id="labFields" class="lab-fields"></div>
+          <details class="lab-schema"><summary>Other student inputs</summary><p class="tip">These complete the notebook’s 12-feature schema. They are not recommendations or explanations of a student’s ability.</p><div id="labOtherFields" class="lab-fields"></div></details>
+          <button class="btn primary" id="labPredict" type="button">Predict GPA</button>
+        </fieldset>
+        <div id="labPrediction" class="lab-empty" aria-live="polite">Your prediction will appear here after training.</div>
+        <div class="controls"><button class="btn" type="button" id="labPin" disabled>Keep as baseline</button><button class="btn" type="button" id="labExport" disabled>Download prediction</button></div>
+        <p class="tip">Scenario differences describe model behavior, not a proven effect of changing attendance or study habits. This teaching demo is not validated for student decisions.</p>
+      </div>
+    </div>
+    <details class="lab-explain"><summary>What is actually running?</summary><p>The browser removes identifiers and the GPA-derived GradeClass, shuffles the data, holds back 20%, and fits the chosen regressor on the remaining 80%. Test R², RMSE and MAE are calculated on the held-out rows. Predictions use all 12 inputs. Linear regression uses a tiny numerical regularizer (0.000001). Neither method is the saved SVR from the study; the SVR results remain in the research section below.</p><p>For a panel walkthrough: load data → train → predict → keep a baseline → increase absences → predict again → explain the difference and inspect test error.</p></details>
   </div>
 </section>
 
@@ -386,7 +435,7 @@
     <ol class="refs" id="refList"></ol>
     <div class="linkrow">
       <a class="btn" id="ghLink" href="#" rel="noopener">GitHub repository: link coming soon</a>
-      <a class="btn" id="kgLink" href="#" rel="noopener">Kaggle notebook: link coming soon</a>
+      <a class="btn" id="kgLink" href="#" rel="noopener">Kaggle dataset: link coming soon</a>
     </div>
   </div>
 </section>
@@ -402,5 +451,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" integrity="sha512-CQBWl4fJHWbryGE+Pc7UAxWMUMNMWzWxF4SQo9CgkJIN1kx6djDQZjh3Y8SZ1d+6I+1zze6Z7kHXO7q3UyZAWw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="data.js"></script>
 <script src="script.js"></script>
+<script src="demo-engine.js"></script>
+<script src="demo.js"></script>
 </body>
 </html>

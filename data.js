@@ -562,5 +562,5 @@ window.DATA = {
     { t: "Fortin, F.-A. et al. (2012). DEAP: Evolutionary Algorithms Made Easy. JMLR, 13, 2171–2175. (Library used by the base paper for its GA.)", url: "https://jmlr.org/papers/v13/fortin12a.html", label: "jmlr.org/papers/v13/fortin12a.html" }
   ],
 
-  links: { github: "https://github.com/nandeshkanagaraju/student-success-ml", kaggle: "#" }   // TODO: replace kaggle "#" with your Kaggle notebook URL
+  links: { github: "https://github.com/nandeshkanagaraju/student-success-ml", kaggle: "https://www.kaggle.com/datasets/rabieelkharoua/students-performance-dataset" }
 };
